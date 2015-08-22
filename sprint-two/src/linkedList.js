@@ -28,6 +28,22 @@ var LinkedList = function(){
     return false;
   };
 
+  list.addToHead = function(value) {
+    if (list.head === null) {
+      list.head = Node(value);
+      list.tail = list.head;
+    } else {
+      list.head.previous = Node(value);
+      list.head = list.head.previous;
+    }
+  };
+
+  list.removeTail = function() {
+    var currentTail = list.tail.value;
+    list.tail = list.tail.previous;
+    return currentTail;
+  };
+
   return list;
 };
 
@@ -36,6 +52,7 @@ var Node = function(value){
 
   node.value = value;
   node.next = null;
+  node.previous = null;
 
   return node;
 };
