@@ -40,4 +40,19 @@ describe('tree', function() {
     expect(tree.contains(7)).to.equal(true);
     expect(tree.contains(8)).to.equal(true);
   });
+
+  // tests for advanced features
+  it('should add parent to a new child', function(){
+    tree.addChild(7);
+    tree.children[0].addChild(8);
+    expect(tree.children[0].children[0].parent.value).to.equal(7);
+  });
+
+  it('should disassociate the tree from its parent', function(){
+    tree.addChild(5); // children[0]
+    tree.children[0].addChild(6); // children[0].children[0]
+    tree.children[0].children[0].addChild(7); // children[0].children[0].children[0]
+    tree.children[0].children[0].removeFromParent();
+    expect(tree.children[0].children[0].parent).to.equal(null);
+  });
 });
